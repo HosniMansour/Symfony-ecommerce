@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="large-12 columns ">
+        <div class="title-block">
+            <h3>Nos Partenaires</h3>
+            <div class="divider"><span></span></div>
+        </div>
+        <div id="slider5">
+            <a class="buttons next disable" href="#"></a>
+            <a class="buttons prev" href="#"></a>
+            <div class="viewport">
+                <ul class="overview" style="width: 2096px; left: -1048px;">
+                    {% set partenaires = GetPartenaires() %}
+                    {% for part in partenaires %}
+                        <li><a target="_blank" href="{{ part.lien }}"><img width="150" height="66" src="{{ asset(part.image.image) }}" alt="{{part.nom}}"></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+            jQuery(document).ready(function(){
+                jQuery('#slider5').tinycarousel(
+                        {
+                            interval: true,
+                            intervalTime:3000,
+                            infinite:true,
+                            animate:true
+                        });
+            });
+        </script>
+    </div>
+</div>
+{% block javascripts %}
+    <script type='text/javascript' src="{{ asset('js/jquery.tinycarousel.min.js?ver=4.4.1') }}"></script>
+{% endblock %}

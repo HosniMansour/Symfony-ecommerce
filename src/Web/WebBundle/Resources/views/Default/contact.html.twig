@@ -1,0 +1,65 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+{% include 'WebWebBundle:Default:layout/slide.html.twig' %}
+<br/><br/>
+<div class="contact">
+    <div class="container">
+        <h3>Contact </h3>
+        <iframe src="https://www.google.com/maps/d/embed?mid=zeXKeP0dE-BI.kfs4ZEpnr6LU&z=15" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <div class="contact-form">
+            <div class="col-md-4 contact-form-left">
+                    {{contact.contenu |raw}}
+            </div>
+            <div class="col-md-8">
+                <h4>Formulaire</h4>
+                <br/>
+                {% if msj is defined %}
+                    {% if msj == true %}
+                        <div class="alert alert-success fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>Message envoyé!</strong> Nous vous rappellerons dans les plus brefs délais.
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <br/>
+                <form method="POST" action="{{path ('contact')}}" class="form-horizontal" >
+                    <div class="form-group">
+                        <div class="col-lg-4">
+                            <input type="text" name="nom" class="form-control" placeholder="Nom" required />
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required />
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" name="tele" class="form-control" placeholder="Téléphone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <input type="text" name="objet" class="form-control" placeholder="Objet" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message..." required=""></textarea>
+                        </div>
+                    </div>
+                    <input type="hidden" name="type" value="contact" class="form-control" >
+                    <button type="submit" class="btn btn-info pull-right">Envoyer</button>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+{% include 'WebWebBundle:Default:layout/partenaire.html.twig' %}
+{% endblock %}
+{% block javascripts %}
+
+<script type='text/javascript' src="{{ asset('js/jquery.tinycarousel.min.js?ver=4.4.1') }}"></script>
+
+{% endblock %}

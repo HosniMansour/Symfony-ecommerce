@@ -1,0 +1,105 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Modifier Utilisateur</span></h4>
+            </div>
+            <div class="grid-body">
+                <div class="col-md-12">
+                    <div class="col-md-6">
+                        {{ form_start(edit_form) }}
+                        {{ form_row(edit_form.username) }}
+                        {{ form_row(edit_form.email) }}
+                        {{ form_row(edit_form.nom) }}
+                        <div class="form-group">
+                            <div class="form-group last">
+                                <label class="control-label col-md-3">Avatar :</label>
+                                <div class="col-md-9">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                            {%
+                                                set img = 'img/default-avatar.png'
+                                            %}
+                                            {% if edit_form.vars.value.image is not null %}
+                                                {% set img = edit_form.vars.value.image.image %}
+                                            {% endif %}
+
+                                            <img id="preview" src="{{ asset(img) }}" width="200" height="150" style="width: 100%;height: 100%;" alt="">
+                                        </div>
+                                        {{ form_widget(edit_form.image.file, { 'attr': {'value': 'hello'} }) }}
+                                        <br/>
+                                        <div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-md-3"><label class="control-label" for="user_tel">Compte :</label><br/></div>
+                            <div class="col-md-3">
+                                <div class="radio radio-primary">
+                                    <input id="activer" type="radio" name="optionenable" value="1" {% if user.enabled == 1 %}checked="checked"{% endif %}>
+                                    <label for="activer">Activer</label>
+                                    <input id="desactiver" type="radio" name="optionenable" value="0" {% if user.enabled == 0 %}checked="checked"{% endif %} >
+                                    <label for="desactiver">Désactiver</label>
+                                </div>
+                            </div>
+                        </div>
+                        <br/><br/><br/>
+                        {{ form_row(edit_form.prenom) }}
+                        {{ form_row(edit_form.adresse) }}
+                        {{ form_row(edit_form.tel) }}
+                        <div class="form-group">
+                            <label class="control-label" for="user_tel">Role :</label><br/>
+                            <div class="radio radio-success">
+                                <input id="user" type="radio" name="optionrole" value="user" {% if role == "user" %}checked="checked"{% endif %}>
+                                <label for="user">Utilisateur</label>
+                                <input id="responsable" type="radio" name="optionrole" value="responsable" {% if role == "responsable" %}checked="checked"{% endif %} >
+                                <label for="responsable">Responsable Commercial</label>
+                                <input id="admin" type="radio" name="optionrole" value="admin" {% if role == "admin" %}checked="checked"{% endif %}>
+                                <label for="admin">Administrateur</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {{ form_widget(edit_form.image.nom, { 'attr': {'style': 'display:none;'} }) }}
+
+                <div style=" float: right; margin-right: 1%;" >
+                    <a href="{{ path('user_index') }}"><span class="btn btn-default" >Retour à la liste</span>   </a>
+                    <button type="submit" class="btn btn-info" >Modifier Utilisateur</button>
+                </div>
+                {{ form_rest(edit_form) }}
+                {{ form_end(edit_form) }}
+                {{ form_start(delete_form) }}<button type="submit" class="btn btn-danger" >Supprimer</button> {{ form_end(delete_form) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('admin/lib/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#page_image_file").change(function(){
+            readURL(this);
+        });
+    </script>
+{% endblock %}

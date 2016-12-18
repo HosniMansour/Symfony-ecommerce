@@ -1,0 +1,37 @@
+web_web_homepage:
+    path:     /
+    defaults: { _controller: WebWebBundle:Default:index }
+
+page:
+    path:     /page/{nom}
+    defaults: { _controller: WebWebBundle:Default:page }
+
+demande:
+    path:     /demande-devis
+    defaults: { _controller: WebWebBundle:Default:formDemande }
+
+contact:
+    path:     /contact
+    defaults: { _controller: WebWebBundle:Default:formContact }
+
+produit:
+    path:     /categorie/{page}
+    defaults: { _controller: WebWebBundle:Produit:produit }
+
+catproduit:
+    path:     /categorie/{page}/{cat}
+    defaults: { _controller: WebWebBundle:Produit:catProduit }
+
+souscproduit:
+    path:     /categorie/{page}/{cat}/{souscat}
+    defaults: { _controller: WebWebBundle:Produit:sousCatProduit }
+
+infoproduit:
+    path:     /produit/{prod}
+    defaults: { _controller: WebWebBundle:Produit:seulProduit }
+
+chercher:
+    path:     /chercher
+    defaults: { _controller: WebWebBundle:Produit:chercher }
+
+

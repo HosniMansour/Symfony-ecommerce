@@ -1,0 +1,4 @@
+web_admin_homepage:
+    path:     /administrator
+    defaults: { _controller: WebAdminBundle:Admin:admin }
+

@@ -1,0 +1,107 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+    {% set total = 0 %}
+    <br/><br/>
+<section id="cart_items">
+    <div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple ">
+                <div class="grid simple">
+                    <div class="grid-body no-border invoice-body"> <br>
+                        <div class="pull-right">
+                            <div class="col-md-12">
+                                <a href="{{ path('panier') }}"><span class="btn btn-default"><i style="top: 4px;color: #000;" class="fa fa-mail-reply"></i> Retour</span></a>
+                                <span onclick="window.print();" class="btn btn-success"><i style="top: 4px;color: #FFF;" class="fa fa-print"></i> Imprimer</span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4 class="semi-bold">{{ commande.user.nom }} {{ commande.user.prenom }}</h4>
+                                <address>
+                                    User Id : {{ commande.user.id }}
+                                    <br/>
+                                    {{ commande.user.adresse }}
+                                    <br/>
+                                    <abbr title="Phone">Téléphone:</abbr> {{ commande.user.tel }}
+                                </address>
+                            </div>
+                            <div class="col-md-3"> <br>
+                                <div>
+                                    <div class="pull-left"> Commande Num : </div>
+                                    <div class="pull-right"> {{ commande.id }} </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div>
+                                    <div class="pull-left"> Commande Date : </div>
+                                    <div class="pull-right">{% if commande.date %}{{ commande.date|date('Y-m-d') }}{% endif %} </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <br>
+                                <div class="well well-small green">
+                                    <div class="pull-left"> Totale : </div>
+                                    <div class="pull-right"> {{ commande.total }} Dt </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width:60px" class="unseen text-center">QTE</th>
+                                <th class="text-left">Nom Produit</th>
+                                <th style="width:140px" class="text-right">Prix</th>
+                                <th style="width:90px" class="text-right">Totale</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for cmd in commande.lignes %}
+                                <tr>
+                                    <td class="unseen text-center">{{ cmd.qte }}</td>
+                                    <td>{{ cmd.produit.nom }}</td>
+                                    <td class="text-right">{{ cmd.produit.prix }}</td>
+                                    <td class="text-right">{{ (cmd.produit.prix * cmd.qte)|number_format(3, '.', ',') }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>PRIX HT Totale</td>
+                                <td class="text-right">{{ (commande.total)|number_format(3, '.', ',') }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>TVA</td>
+                                <td class="text-right">{{ ((commande.total*12)/100)|number_format(3, '.', ',') }}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td><strong>TOTAL TTC</strong></td>
+                                <td class="text-right"><strong>{{ (commande.total+((commande.total*12)/100))|number_format(3, '.', ',') }}</strong></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        <h5 class="text-right text-black">Medor Medical</h5>
+                        <h5 class="text-right semi-bold text-black">medor.tn</h5>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+    <br/><br/>
+{% endblock %}
+

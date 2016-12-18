@@ -1,0 +1,72 @@
+{% extends '::layout/backend.html.twig' %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Produits</span></h4>
+            </div>
+            <div class="grid-body">
+                <div class="row">
+                    <a href="{{ path('produit_new') }}">
+                        <button class="btn btn-primary pull-left">
+                            <i class="fa fa-plus"></i>
+                                Ajouter Un Produit
+                        </button>
+                    </a>
+                </div>
+                <br/>
+                <table class="table" id="example3" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Code</th>
+                            <th>Prix</th>
+                            <th>Qunatité</th>
+                            <th>Catégorie</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for produit in produits %}
+                        <tr>
+                            <td>{{ produit.id }}</td>
+                            <td>{{ produit.nom }}</td>
+                            <td>{{ produit.code }}</td>
+                            <td>{{ produit.prix|number_format(3, '.', ',') }} DT</td>
+                            <td>{{ produit.nbrstock }}</td>
+                            <td>{{ produit.categorie.nom }}</td>
+                            <td>
+                                <ul style="list-style-type:none;padding:0px;margin:0px;">
+                                    <li style="margin-bottom: 5px;">
+                                        <a href="{{ path('produit_show', { 'id': produit.id }) }}"><button class="btn btn-sm btn-info">Afficher</button></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('produit_edit', { 'id': produit.id }) }}"><button class="btn btn-sm btn-default">Modifier</button></a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('assets/plugins/bootstrap-select2/select2.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-datatable/js/jquery.dataTables.min.js')}}" type="text/javascript" ></script>
+    <script src="{{asset('assets/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js')}}" type="text/javascript" ></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatables-responsive/js/datatables.responsive.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatables-responsive/js/lodash.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.js')}}" type="text/javascript"></script>
+{% endblock %}

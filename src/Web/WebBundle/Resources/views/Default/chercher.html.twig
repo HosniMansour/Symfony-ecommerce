@@ -1,0 +1,101 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+<br/>
+{% include 'WebWebBundle:Default:layout/slideproduit.html.twig' %}
+<br/><br/>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-3 pull-left">
+            <aside class="sidebar sidebar-left">
+                <aside  class="widget widget-style clearfix widget_product_categories">
+                    <h3 class="widget-title"><span><span>Chercher</span></span></h3>
+                    <br/>
+                    <div class="col-md-12">
+                        <form method="Get" action="{{ path('chercher') }}">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" name="s" class="form-control"  placeholder="Chercher (par nom ou code)" >
+                                <span class="input-group-addon">
+                                    <button type="submit">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <br/>
+                        </form>
+                    </div>
+
+                </aside>
+                <aside  class="widget widget-style clearfix widget_product_categories">
+                    {% for item in categorie.filles %}
+                    <h3 class="widget-title"><span><span>{{ item.nom }}</span></span></h3>
+                    <ul class="product-categories">
+                        {% for i in item.filles %}
+                        <li class="cat-item cat-parent">
+                            <ul class='children active'>
+                                <a href="{{ path ('catproduit', {'page': categorie.lien,'cat': i.lien}) }}">
+                                    {{ i.nom }}
+                                </a>
+                                {% for j in i.filles %}
+                                           <span class='dropDownMenu'>
+                                                <li class="cat-item">
+                                                    <a href="{{ path ('souscproduit', {'page': categorie.lien,'cat': i.lien,'souscat': j.lien}) }}">
+                                                        {{ j.nom }}
+                                                    </a>
+                                                </li>
+                                            </span>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </aside>
+            </aside>
+        </div>
+        <div id="main-content" class="main-content col-xs-12 col-xs-12 col-md-9">
+            <div id="primary" class="content-area">
+                <div id="content" class="site-content" role="main">
+
+                        <!-- Loop Here -->
+                        {% if produits |length > 0 %}
+                        <h1 class="page-title">{{ rq }}</h1>
+                        <ul class="ProductList" >
+                        {% for item in produits %}
+                            <li class="col-lg-4 col-md-4 col-sm-4 grid" >
+                                {% set link = path ('infoproduit', {'prod': item.lien}) %}
+                                <a href="{{ link }}">
+                                    <div class="ProductImage QuickView" >
+                                        <a href="{{ link }}" style="height: 250px;">
+                                            {% if item.photos[0] is defined %}
+                                                <img style="height: 250px;" src="{{ asset(item.photos[0].image) }}" alt="">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="ProductDetails"> <a href="{{ link }}" class="">{{ item.nom|slice(0, 30) }}{% if (item.nom|length)>30 %}...{% endif %}</a></div>
+                                    <em class="p-price">{{ item.prix|number_format(3, '.', ',') }} DT</em>
+                                    <div style="margin-top: 15px;"><a href="{{ path('addpanier',{'id' : item.id }) }}" class="panbtn Small" title="Ajouter Au Panier">Ajouter Au Panier</a></div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% else %}
+                            <div class="alert alert-success">Pas de produits trouvés qui correspondent à votre recherche.</div>
+                        {% endif %}
+                        <!-- End Loop -->
+                </div>
+            </div>
+
+            <div class="text-center">
+                {{ knp_pagination_render(produits) }}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<br/><br/>
+{% include 'WebWebBundle:Default:layout/partenaire.html.twig' %}
+{% endblock %}{% block javascripts %}
+{% endblock %}
+

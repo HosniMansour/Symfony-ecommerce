@@ -1,0 +1,190 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('css/ekko-lightbox.min.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<br/><br/>
+{% set nompage = "categorie.nom" %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-3 pull-left">
+            <aside class="sidebar sidebar-left">
+                <aside  class="widget widget-style clearfix widget_product_categories">
+                    <h3 class="widget-title"><span><span>Chercher</span></span></h3>
+                    <br/>
+                    <div class="col-md-12">
+                        <form method="Get" action="{{ path('chercher') }}">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" name="s" class="form-control"  placeholder="Chercher..." >
+                                <span class="input-group-addon">
+                                    <button type="submit">
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <br/>
+                        </form>
+                    </div>
+                </aside>
+                <aside  class="widget widget-style clearfix widget_product_categories">
+                    {% for item in categorie.filles %}
+                        <h3 class="widget-title"><span><span>{{ item.nom }}</span></span></h3>
+                        <ul class="product-categories">
+                            {% for i in item.filles %}
+                                <li class="cat-item cat-parent">
+                                    <ul class='children active'>
+                                        <a href="{{ path ('catproduit', {'page': categorie.lien,'cat': i.lien}) }}">
+                                            {{ i.nom }}
+                                        </a>
+                                        {% for j in i.filles %}
+                                            <span class='dropDownMenu'>
+                                                <li class="cat-item">
+                                                    <a href="{{ path ('souscproduit', {'page': categorie.lien,'cat': i.lien,'souscat': j.lien}) }}">
+                                                        {{ j.nom }}
+                                                    </a>
+                                                </li>
+                                            </span>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </aside>
+            </aside>
+        </div>
+        <div id="main-content" class="main-content col-xs-12 col-xs-12 col-md-9">
+            <div id="primary" class="content-area">
+                <div id="content" class="site-content" role="main">
+                    <div class="row">
+                        <div class="center_column col-xs-12 col-sm-12" id="center_column">
+                            <div id="product">
+                                <div class="primary-box row">
+                                    <div class="pb-left-column col-xs-12 col-sm-5">
+                                        <div class="product-image">
+                                            <div class="product-full">
+                                                <a href="{{ asset(produit.photos[0].image) }}" data-gallery="imagesizes"  data-toggle="lightbox"><img id="pr" src="{{ asset(produit.photos[0].image) }}" ></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <form action="{{ path('addpanier',{'id' : produit.id }) }}" method="GET" >
+                                        <div class="product-information">
+                                            <h2>{{ produit.nom }}</h2>
+                                            <p><b>Code : </b>{{ produit.code }}</p>
+                                            <div class="product-star">
+                                               <br/>
+                                            </div>
+                                            <span>
+                                                <span>{{ produit.prix|number_format(3, '.', ',') }} DT</span>
+
+                                                    <label>Quantity:</label>
+                                                    <input type="number" name="qte" value="1" min="1" max="{{ produit.nbrstock }}" />
+                                                    <button type="submit" class="btn btn-fefault cart">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                        Ajouter Au Panier
+                                                    </button>
+
+                                            </span>
+                                            <br/>
+
+                                        </div>
+                                        </form>
+                                        <br/>
+                                        <p><b>Qunatité disponible : </b>{{ produit.nbrstock }}</p>
+                                        <br/>
+                                        <div class="col-sm-9" >
+                                            {% for img in produit.photos %}
+                                            <div id="im{{loop.index}}" class="col-sm-3" style="height: 80px;">
+                                                <a data-gallery="imagesizes" href="{{ asset(img.image) }}" data-toggle="lightbox"><img src="{{asset (img.image)}}" height="80" width="80" style="height: 100%;"></a>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="row">
+                                    <div class="product-tab">
+                                        <ul class="nav-tab"     style="margin: 0px 0px 0px -13px;">
+                                            <li class="active">
+                                                <a aria-expanded="true" data-toggle="tab" href="#product-detail">Détails Produit</a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#guarantees" aria-expanded="false">Demande Devis</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-container">
+                                            <div id="product-detail" class="tab-panel active">
+                                                {{ produit.description |raw }}
+                                            </div>
+                                            <div id="guarantees" class="tab-panel">
+                                                <form method="POST" action="{{path ('infoproduit', {'prod': produit.lien})}}" class="form-horizontal" >
+                                                    {% if msj is defined %}
+                                                    {% if msj == true %}
+                                                    <div class="alert alert-success fade in">
+                                                        <button data-dismiss="alert" class="close close-sm" type="button">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                        <strong>Message envoyé!</strong> Nous vous rappellerons dans les plus brefs délais.
+                                                    </div>
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    <div class="form-group">
+                                                        <label for="inputNom" class="col-lg-2 col-sm-2 control-label">Nom :</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" name="nom" class="form-control" id="inputNom" placeholder="Votre Nom">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputemail" class="col-lg-2 col-sm-2 control-label">Email :</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="email" name="email" class="form-control" id="inputemail" placeholder="Votre Email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputobjet" class="col-lg-2 col-sm-2 control-label">Objet :</label>
+                                                        <div class="col-lg-10">
+                                                            <input type="text" name="objet[]" class="form-control" id="inputobjet" placeholder="Objet">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="inputmsj" class="col-lg-2 col-sm-2 control-label">Message :</label>
+                                                        <div class="col-lg-10">
+                                                            <textarea type="text" name="message" id="inputmsj" class="form-control" rows="3" required=""></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="type" value="demendedevisunproduit" class="form-control" >
+                                                    <input type="hidden" name="produitid" value="{{produit.id}}" class="form-control" >
+                                                    <button type="submit" class="btn btn-info pull-right">Envoyer</button>
+                                                    <br/>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+
+{% endblock %}
+
+
+{% block javascripts %}
+<script src="{{asset('js/ekko-lightbox.min.js')}}"></script>
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
+
+{% endblock %}

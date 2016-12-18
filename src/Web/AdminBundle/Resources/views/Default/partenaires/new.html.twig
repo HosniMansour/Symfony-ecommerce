@@ -1,0 +1,85 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('admin/lib/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Ajouter Un Partenaire</span></h4>
+            </div>
+            <div class="grid-body">
+                <form enctype="multipart/form-data" action="{{path('partenaires_new')}}" method="POST" {{form_enctype(form)}}>
+                    <div class="col-md-12">
+                        {% if not form.vars.valid %}
+                        {{ form_errors(form) }}
+                        {% endif %}
+                        <div class="position-center">
+                            <div class="form-group">
+                                {{ form_row(form.nom, { 'label' : 'Nom Partenaire :' }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.lien, { 'label' : 'Site Web Partenaire :' }) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group last">
+                                    <label class="control-label col-md-3">Image de partenaire :</label>
+                                    <div class="col-md-9">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                <img id="preview" src="{{asset('admin/img/noimage.png')}}" width="200" height="150" style="width: 100%;height: 100%;" alt="">
+                                            </div>
+                                             <br/>
+                                            <div>
+                                                {{ form_widget(form.image.nom, { 'attr': {'style': 'display:none;'} }) }}
+                                                {{ form_widget(form.image.file) }}
+                                            </div>
+                                        </div>
+                                        <span class="label label-danger">NOTE!</span>
+                                         <span>
+                                            Resolution doit être 160x70.
+                                         </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div style=" float: right; margin-right: 1%; " >
+                        <a href="{{ path('produit_index') }}"><span class="btn btn-default" >Retour à la liste</span>   </a>
+                        <button id="sub" type="submit" class="btn btn-info" >Ajouter Partenaire</button>
+                    </div>
+                    {{ form_rest(form) }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#partenaires_nom').keyup(function() {
+            $('#partenaires_image_nom').val($(this).val());
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#partenaires_image_file").change(function(){
+            readURL(this);
+        });
+
+    </script>
+{% endblock %}

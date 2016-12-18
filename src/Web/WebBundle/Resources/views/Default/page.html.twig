@@ -1,0 +1,23 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+{% include 'WebWebBundle:Default:layout/slide.html.twig' %}
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="col-md-4 banner-bottom-left">
+				<img src="{{ asset(page.image.image) }}" alt=" " class="img-responsive" />
+			</div>
+			<div class="col-md-8 banner-bottom-right">
+				<h3>{{page.nom}}</h3>
+				<br>
+				<p>{{page.contenu | raw}}</p>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<br/><br/>
+{% include 'WebWebBundle:Default:layout/partenaire.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

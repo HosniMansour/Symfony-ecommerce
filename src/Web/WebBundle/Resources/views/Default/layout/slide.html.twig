@@ -1,0 +1,63 @@
+<div class="tp-slider">
+    <div id="slider" class="owl-carousel owl-theme main-slider">
+        <div class="item">
+            <div class="container">
+                <div class="caption">
+                </div>
+            </div>
+            <img width="1905" height="312" src="{{ asset('img/slider/firstslide.jpg') }}" class="attachment-full" alt="Medor" />
+        </div>
+
+        <div class="item">
+            <div class="container">
+                <div class="caption">
+                </div>
+            </div>
+            <img width="1905" height="312" src="{{ asset('img/slider/slideeqcab.jpg') }}" class="attachment-full" alt="Equipement Ccabinet" />
+        </div>
+
+        <div class="item">
+            <div class="container">
+                <div class="caption">
+                </div>
+            </div>
+            <img width="1905" height="612" src="{{ asset('img/slider/accessoires-orthopediques.jpg') }}" class="attachment-full" alt="Accessoires Orthopediques" />
+        </div>
+
+        <div class="item">
+            <div class="container">
+                <div class="caption">
+                </div>
+            </div>
+            <img width="1905" height="312" src="{{ asset('img/slider/aide-a-la-marche.jpg') }}" class="attachment-full" alt="Aide a la Marche" />
+        </div>
+        <div class="item">
+            <div class="container">
+                <div class="caption">
+                </div>
+            </div>
+            <img width="1905" height="612" src="{{ asset('img/slider/sabot.jpg') }}" class="attachment-full" alt="Sabot" />
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script type='text/javascript' src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript">
+        var $ = jQuery.noConflict();
+        if($('.owl-theme').hasClass('main-slider'))
+        {
+            $(document).ready(function() {
+                $('.main-slider').owlCarousel({
+                    animateOut: 'slideOutDown',
+                    animateIn: 'flipInX',
+                    items:1,
+                    margin:30,
+                    stagePadding:30,
+                    smartSpeed:450,
+                    autoPlay:4000
+                });
+            });
+        }
+    </script>
+{% endblock %}

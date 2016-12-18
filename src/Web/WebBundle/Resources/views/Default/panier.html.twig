@@ -1,0 +1,150 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+{% set total = 0 %}
+<br/><br/>
+<br/><br/>
+<section id="cart_items">
+    <div class="container">
+        <div class="table-responsive cart_info">
+            {% if getGlobals()['NbrPan']==0 %}
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Nom</th>
+                    <th class="price">Prix</th>
+                    <th class="quantity">Quantity</th>
+                    <th class="total">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <td> Panier Vide !</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                </tbody>
+                </table>
+            <br/><br/>
+            <div style=" float: right;" >
+                <a href="{{path ('web_web_homepage')}}"><button class="btn btn-md btn-default" >Acceuil</button></a>
+            </div>
+            {%  else %}
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Nom</th>
+                    <th class="price">Prix</th>
+                    <th class="quantity">Quantity</th>
+                    <th class="total">Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                <tr>
+                    <td class="text-center">
+                        <a href=""><img  src="{{ asset(produit.photos[0].image) }}" width="50" height="50" alt=""></a>
+                    </td>
+                    <td class="text-center" >
+                        <h4><a href="">{{ produit.nom }}</a></h4>
+                        <p> Code: {{ produit.code }}</p>
+                    </td>
+                    <td class="text-center">
+                        <p>{{ produit.prix|number_format(3, '.', ',') }} DT</p>
+                    </td>
+                    <td class="text-center" >
+                        <div class="col-md-12">
+                            <form action="{{ path('addpanier',{'id' : produit.id }) }}" method="GET">
+                                <div class="col-md-8"><input type="number" name="qte" value="{{ panier[produit.id] }}" class="spinner-input form-control" min="0" max="50" ></div>
+                                <div class="col-md-2"><button type="submit" class="btn btn-md btn-default" ><i class="fa fa-refresh"></i></button></div>
+                            </form>
+                        </div>
+                    <td class="text-center">
+                        {% set total = total + (produit.prix * panier[produit.id]) %}
+                        <p class="cart_total_price">{{ (produit.prix * panier[produit.id])|number_format(3, '.', ',') }} DT</p>
+                    </td>
+                    <td class="text-center">
+                        <a class="cart_quantity_delete" href="{{ path('removepanier',{'id' : produit.id }) }}"><button class="btn btn-md btn-default" ><i class="fa fa-times"></i></button></a></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"></td>
+                    <td class="text-center"><b>{{ total |number_format(3, '.', ',') }} DT</b></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table no-border">
+                <thead>
+                <tr>
+                    <th>Montant</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="pull-right" width="100px" style="border-top: beige;"><b>PRIX HT</b></td>
+                    <td class="text-center" width="120px" style="border-top: beige;">{{ total |number_format(3, '.', ',') }} DT</td>
+                </tr>
+                <tr>
+                    <td class="pull-right" width="100px"><b>TVA</b></td>
+                    <td class="text-center" width="120px">{{ ((total * 12) / 100) |number_format(3, '.', ',') }}
+                </tr>
+                <tr>
+                    <td class="pull-right" width="100px"><b>TOTAL TTC</b></td>
+                    <td class="text-center" width="120px">{{ (((total * 12) / 100)+total) |number_format(3, '.', ',') }} DT</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style=" float: right;" >
+            <a href="{{ path ('confirmer_commander') }}"><button class="btn btn-md btn-default" >Commander</button></a>
+        </div>
+        {% endif%}
+        <br/><br/>
+        {% if commandes|length > 0  %}
+            <br/><hr/><br/>
+            <div style="text-align: center;">
+                <h4>Historique</h4>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width:60px" class="unseen text-center">id</th>
+                    <th>Etat</th>
+                    <th >Date</th>
+                    <th class="text-right">Totale</th>
+                    <th  class="text-right">afficher</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cmd in commandes %}
+                    <tr>
+                        <td class="unseen text-center">{{ cmd.id }}</td>
+                        <td class="unseen">
+                                {% if cmd.etat == "encour" %}
+                                   En cour.
+                                {% elseif cmd.etat == "annuler" %}
+                                   Commande Annuler.
+                                {% else %}
+                                   Commande validée.
+                                {% endif %}
+                        </td>
+                        <td>{% if cmd.date %}{{ cmd.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td class="text-right">{{ ((((cmd.total * 12) / 100)+cmd.total))|number_format(3, '.', ',') }} DT</td>
+                        <td class="text-right"><a href="{{ path('showcommande', { 'id': cmd.id }) }}"><button class="btn btn-md btn-default" >Afficher</button></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+        <br/><br/>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+<section id="form">
+    <div class="container">
+        <div class="row">
+            {% if error %}
+            <div class="alert alert-block alert-danger fade in">
+                <button data-dismiss="alert" class="close close-sm" type="button">
+                    <i class="fa fa-times"></i>
+                </button>
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
+            {% endif %}
+            <div class="col-sm-4 col-sm-offset-1">
+                <div class="login-form">
+                    <h2>Connexion</h2>
+                    <br/><br/><br/>
+                   <form action="{{ path('fos_user_security_check') }}" method="post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        <input type="text" id="username" name="_username" placeholder="Nom d'utilisateur" required="required" />
+                        <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe" />
+                        <span class="pull-right"><a href="{{path('fos_user_resetting_request')}}">Mot de passe oublié ?</a></span><br/>
+                        <span>
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+                            Rester connecté
+                        </span>
+                        <button class="btn btn-default" type="submit" id="_submit" name="_submit"  >Connexion</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-1">
+                <br/><br/><br/><br/>
+                <h2 class="or">Ou</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="signup-form">
+                    <h2>M’enregistrer!</h2>
+                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+                    {{ form_row(form.username, { 'attr': {'placeholder': 'Nom utilisateur'} }) }}
+                    {{ form_row(form.nom, { 'attr': {'placeholder': 'Nom'} }) }}
+                    {{ form_row(form.prenom, { 'attr': {'placeholder': 'Prenom'} }) }}
+                    {{ form_row(form.email, {'attr': {'placeholder': 'Email'} }) }}
+                    {{ form_row(form.plainPassword.first, {'attr': {'placeholder': 'Mot de Passe'} }) }}
+                    {{ form_row(form.plainPassword.second, {'attr': {'placeholder': 'Confirmer Mot de Passe'} }) }}
+                    <div>
+                        <button class="btn btn-default" type="submit" >M’enregistrer</button>
+                    </div>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+{% endblock %}

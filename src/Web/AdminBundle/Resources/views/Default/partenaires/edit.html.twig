@@ -1,0 +1,78 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('admin/lib/fileupload/bootstrap-fileupload.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block body %}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Modifier Partenaire</span></h4>
+            </div>
+            <div class="grid-body">
+            <form action="{{ path('partenaires_edit',{'id' : partenaire.id}) }}" method="POST" {{form_enctype(edit_form)}}>
+                <div class="form-group">
+                    {{ form_row(edit_form.nom, { 'label' : 'Nom Partenaire :' }) }}
+                </div>
+                <div class="form-group">
+                    {{ form_row(edit_form.lien, { 'label' : 'Site Web Partenaire :' }) }}
+                </div>
+                <div class="form-group">
+                    <div class="form-group last">
+                        <label class="control-label col-md-3">Image de partenaire :</label>
+                        <div class="col-md-9">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img id="preview" src="{{ asset(edit_form.vars.value.image.image) }}" width="200" height="150" style="width: 100%;height: 100%;" alt="">
+                                </div>
+                                <br/>
+                                <div>
+                                    {{ form_widget(edit_form.image.nom, { 'attr': {'style': 'display:none;'} }) }}
+                                    {{ form_widget(edit_form.image.file, { 'attr': {'value': 'hello'} }) }}
+                                </div>
+                            </div>
+                            <span class="label label-danger">NOTE!</span>
+                             <span>
+                                Resolution doit être 160x70.
+                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div style=" float: right; margin-right: 1%; " >
+                    <a href="{{ path('partenaires_index') }}"><span class="btn btn-default" >Retour à la liste</span>   </a>
+                    <button id="sub" type="submit" class="btn btn-info" >Modifier Partenaire</button>
+                </div>
+                {{ form_rest(edit_form) }}
+            </form>
+                {{ form_start(delete_form) }} <input class="btn btn-danger" type="submit" value="Delete"> {{ form_end(delete_form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $('#partenaires_nom').keyup(function() {
+        $('#partenaires_image_nom').val($(this).val());
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#partenaires_image_file").change(function(){
+        readURL(this);
+    });
+</script>
+{% endblock %}

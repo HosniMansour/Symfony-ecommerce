@@ -1,0 +1,97 @@
+{% set ftr=GetFooter()%}
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Newsletter</h4>
+      </div>
+      <div class="modal-body">
+        <p>Merci de vous être abonné(e) à la newsletter.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="tp-footer"><!-- footer section -->
+		<div class="container">
+			<div class="row ft-links">
+				<div id="dentistry_footer_custom_post-3" class="col-md-3 ft-link-block widget_dentistry_footer_custom_post">
+				<h3 class="fttitle" >Site Map</h3>	
+				<div class="custom-post-widget">
+					<ul>			
+						<li><a href="{{ path ('web_web_homepage') }}">Accueil</a></li>
+						<li><a href="{{ path ('page', {'nom': 'presentation'}) }}">Pr&eacute;sentation</a></li>
+						<li><a href="{{ path ('produit', {'page': 'equipement-cabinet'}) }}">Equippement Cabinet</a></li>
+						<li><a href="{{ path ('produit', {'page': 'cabinet-realise'}) }}">Cabinet Réalisé</a></li>
+						<li><a href="{{ path ('produit', {'page': 'accessoires-orthopediques'}) }}">Accesoires orthopédique</a></li>
+						<li><a href="{{ path ('produit', {'page': 'aide-a-la-marche'}) }}">Aide A la marche</a></li>
+						<li><a href="{{ path ('produit', {'page': 'sabot-orthopedique'}) }}">Sabot orthopédique</a></li>
+						<li><a href="{{ path ('demande') }}">Demande devis</a></li>
+						<li><a href="{{ path ('contact') }}">contact</a></li>
+					</ul>
+				</div>
+			</div>
+	  <div id="dentistry_footer_custom_post-2" class="col-md-3 ft-link-block widget_dentistry_footer_custom_post">
+		  <h3 class="fttitle">Implantation</h3>	
+		<div class="custom-post-widget">
+			<ul>
+				{{ftr[0].ftrImpl| raw}}
+			</ul>
+		 </div>    
+	  </div>
+	  <div id="text-2" class="col-md-3 ft-link-block widget_text">
+	   <h3 class="fttitle">Adresse</h3>
+	  <div class="textwidget">
+		<ul>
+			<li>
+				{{ftr[0].ftrAdr| raw}}
+			</li>
+		</ul>
+	  </div>
+	</div>
+	<div id="text-3" class="col-md-3 ft-link-block widget_text">
+		<h3 class="fttitle">Introduction</h3>	<br/>		
+		<div class="textwidget">
+
+			{{ftr[0].ftrIntro| raw}}
+			<br/>
+
+		</div>
+		<h3 class="fttitle" >Newsletter</h3><br/>
+        <form method="POST" id="formoid" action="/subscribe/subscribe.php">
+		  <input type="email" placeholder="Enter votre mail..." name="emailchamp" required="" style="width:70%; height:33px;"/>  <button type="submit" data-toggle="modal" data-target="#myModal" class="btn"><i class="fa fa fa-envelope"></i></button>
+        </form>
+		</div>    
+</div>
+
+	
+<div class="row tp-tiny-footer">
+    <div class="col-md-9">
+        <p>© 2015 <a href="http://www.media-plus.tn/">Media plus</a> Tous droits réservés</p>
+     </div>
+    <div class="col-md-3 tp-social-icon">
+		{% set sc = GetSocial() %}
+		{{ sc[0].SocialNetwork | raw }}
+    </div>
+    
+</div>
+<!-- /.tiny footer --> 
+</div>
+</div>
+
+<script type='text/javascript'>
+    $("#formoid").submit(function(event) {
+      event.preventDefault();
+      var $form = $( this ),
+          url = $form.attr( 'action' );
+      var posting = $.post( url, { name: $('#emailchamp').val() } );
+
+      posting.done(function( data ) {
+      });
+    });
+</script>

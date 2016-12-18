@@ -1,0 +1,216 @@
+.cabinet,
+.link {
+    text-transform: uppercase
+}
+
+.link {
+    color: #717774
+}
+
+.no-padding {
+    padding: 0
+}
+
+::selection {
+    background: #82D400;
+    color: #fff
+}
+
+::-moz-selection {
+    background: #82D400;
+    color: #fff
+}
+
+.cd-top {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background: url(../img/cd-top-arrow.svg) center 50% no-repeat #82D400;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+    -moz-transition: opacity .3s 0s, visibility 0s .3s;
+    transition: opacity .3s 0s, visibility 0s .3s
+}
+
+#slider .owl-buttons .owl-next,
+#slider .owl-buttons .owl-prev {
+    background-color: #82D400;
+    opacity: 1;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 24px;
+    border-radius: 0;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s
+}
+
+#slider .owl-buttons .owl-next,
+#slider .tp-btn-second,
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span,
+body #slider .owl-buttons .owl-prev {
+    background-color: #82D400;
+    color: #FFF
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+    filter: Alpha(Opacity=100);
+    opacity: 1;
+    background-color: #82D400;
+}
+
+.tp-navigation {
+    background: #F0F0F0;
+    border-bottom: 1px solid #6ddb51
+}
+
+.nav>li>a:focus,
+.nav>li>a:hover {
+    background-color: #fff;
+    box-shadow: inset 0 5px #6ddb51
+}
+
+.tp-navigation .navbar-default {
+    background-color: #F5F5F0;
+    border-color: transparent
+}
+
+.tp-navigation .navbar-default .navbar-toggle .icon-bar {
+    background-color: #3fce92
+}
+
+.tp-navigation .navbar-form .tp-btn-default {
+    background-color: #fff;
+    color: #3fce92;
+    padding: 7px 10px
+}
+
+.nav .open>a:focus,
+.nav .open>a:hover,
+.tp-navigation .nav .open>a {
+    background-color: #82D400;
+    border-color: #82D400;
+}
+
+.more a:hover {
+    color: #3fce92;
+    background: #fff;
+    text-decoration: none
+}
+
+.button,
+.button:focus,
+.button:hover {
+    background-color: #82D400;
+}
+
+.service-type-grd-right h4 {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin: 1em 0;
+    line-height: 1.3em;
+    color: #82D400;
+}
+
+h2.titre1 span,
+h2.titre2 {
+    padding: 2px 10px 2px 5px;
+    margin-left: 10px;
+    border-left: 5px solid #3fce92;
+    border-bottom: 2px dotted #3fce92;
+    color: #804000
+}
+
+h2.titre2 {
+    display: inline
+}
+
+.title-block .icon-container {
+    float: left;
+    background: #82D400;
+    width: 63px;
+    height: 55px;
+    text-align: center
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #82D400;
+    float: left;
+    margin: 18px 0 0 -4px
+}
+
+.divider span {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #82D400;
+    margin-top: -2px
+}
+
+.view-two .mask a.btn-icon:hover i {
+    color: #82D400;
+}
+
+.button,
+.cabinet {
+    color: #fff;
+    text-align: center
+}
+
+.cabinet {
+    background: #82D400;
+    padding: 14px 20px 10px
+}
+
+.button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 300;
+    line-height: 1;
+    margin: 0 0 1.25em;
+    position: relative;
+    text-decoration: none;
+    display: block;
+    font-size: 1em;
+    padding: .75em 1.5em .8125em
+}
+
+.login-form form button,
+.or,
+.signup-form form button {
+    background: #6DDB51;
+    color: #FFF;
+    font-family: Roboto, sans-serif
+}
+
+.or {
+    border-radius: 40px;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 75px;
+    text-align: center;
+    width: 50px
+}
+
+.login-form form button,
+.signup-form form button {
+    border: none;
+    border-radius: 0;
+    display: block;
+    padding: 6px 25px
+}

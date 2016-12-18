@@ -1,0 +1,31 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+    <br/><br/>
+    <center>
+        <article id="post-0" class="post error404 not-found">
+            <br>
+            <img src="http://www.medormedical.com/img/404.png" >
+            <br>
+            <h1 class="entry-title">Page introuvable !</h1>
+            <p>La page que vous recherchez n’est plus en ligne sur Notre site (ou ne l’a jamais été). </p>
+            <p> Vous pouvez consulter notre moteur de recherche ci-dessous ou vous rendre sur notre <a href="http://www.medormedical.com/" target="_self">page d’accueil</a>.</p>
+            <div style="margin-left: 10%;margin-right: 10%;">
+                <form method="Get" action="{{ path('chercher') }}">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" name="s" class="form-control"  placeholder="Chercher" >
+                        <span class="input-group-addon">
+                            <button type="submit">
+                                <span class="fa fa-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                    <br/>
+                </form>
+            </div>
+        </article>
+    </center>
+    <br/><br/>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}

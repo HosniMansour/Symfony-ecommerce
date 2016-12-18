@@ -1,0 +1,77 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+
+{% include 'WebWebBundle:Default:layout/slide.html.twig' %}
+
+<!-- Presentation -->
+<br/><br/>
+<div class="banner-bottom">
+	<div class="container">
+		<div class="col-md-4 banner-bottom-left">
+			<img src="img/i1.jpg" alt=" " class="img-responsive" />
+		</div>
+		<div class="col-md-8 banner-bottom-right">
+			<h3>{{page.nom}}</h3>
+			<br/>
+			<p>{{page.contenu | striptags('<p><b><br/>')|slice(0, 480)|raw}}</p>
+			<button class="btn btn-md pull-right"><a href="{{ path ('page', {'nom': 'presentation'}) }}">En savoir plus</a></button>
+
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>
+<br/><br/>
+<br/><br/>
+<!-- Service -->
+<div class="container">
+	<div class="large-12 columns ">
+		<div class="title-block">
+			<h3>Cabinet</h3>
+			<div class="divider"><span></span></div>
+		</div>
+		<div class="imagecabinet">
+         <div class="col-md-4" style="margin-bottom: 10px;">
+            <div class="view view-two">
+				<img src="{{ asset('img/888.jpg') }}" alt="">
+				<div class="mask">
+					<h3>Cabinet kiné</h3>
+					<p>...</p>
+					<center><a class="button btn-icon icon-2" href="{{ path ('produit', {'page': 'equipement-cabinet'}) }}"><i class="fa fa-external-link"></i></a></center>
+				</div>
+			</div>
+            <div class="cabinet">Cabinet kiné</div>
+         </div>
+         <div class="col-md-4" style="margin-bottom: 10px;">
+            <div class="view view-two">
+				<img src="{{ asset('img/999.jpg') }}" alt="">
+				<div class="mask">
+					<h3>Cabinet medecin</h3>
+					<p>...</p>
+					<center><a class="button btn-icon icon-2" href="{{ path ('produit', {'page': 'cabinet-realise'}) }}"><i class="fa fa-external-link"></i></a></center>
+				</div>
+			</div>
+            <div class="cabinet">Cabinet medecin</div>
+         </div>
+         <div class="col-md-4" style="margin-bottom: 10px;">
+         <div class="view view-two">
+			 <img src="{{ asset('img/100.jpg') }}" alt="">
+			 <div class="mask">
+				 <h3>Cabinet realisé</h3>
+				 <p>...</p>
+				 <center><a class="button btn-icon icon-2" href="{{ path ('produit', {'page': 'cabinet-realise'}) }}"><i class="fa fa-external-link"></i></a></center>
+			 </div>
+		 </div>
+         <div class="cabinet">Cabinet realisé</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- End Service -->
+<br/><br/>
+
+{% include 'WebWebBundle:Default:layout/partenaire.html.twig' %}
+
+{% endblock %}
+
+

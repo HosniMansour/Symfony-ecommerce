@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% set info=GetSiteInfo()%}
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{{info[0].nomSite}}{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.gif') }}" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="{{info[0].descSite}}">
+	    <meta name="keywords" content="{{info[0].keyWordSite}}" />
+        {% include '::pageblocks/frontend/head.html.twig' %}
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% include '::pageblocks/frontend/header.html.twig' %}
+        {% block body %}{% endblock %}
+        {% include '::pageblocks/frontend/footer.html.twig' %}
+        {% include '::pageblocks/frontend/footerscript.html.twig' %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

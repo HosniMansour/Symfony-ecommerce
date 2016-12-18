@@ -1,0 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register')}) }}
+
+    {{ form_row(form.username, { 'attr': {'placeholder': 'Nom utilisateur'} }) }}
+    {{ form_row(form.nom, { 'attr': {'placeholder': 'Nom'} }) }}
+    {{ form_row(form.prenom, { 'attr': {'placeholder': 'Prenom'} }) }}
+    {{ form_row(form.email, {'attr': {'placeholder': 'Email'} }) }}
+    {{ form_row(form.plainPassword.first, {'attr': {'placeholder': 'Mot de Passe'} }) }}
+    {{ form_row(form.plainPassword.second, {'attr': {'placeholder': 'Confirmer Mot de Passe'} }) }}
+    <div>
+        <button class="btn btn-default" type="submit" >M’enregistrer</button>
+    </div>
+{{ form_end(form) }}

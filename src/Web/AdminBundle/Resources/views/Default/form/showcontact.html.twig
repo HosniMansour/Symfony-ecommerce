@@ -1,0 +1,95 @@
+{% extends '::layout/backend.html.twig' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Contact</span></h4>
+            </div>
+            <div class="grid-body">
+                <br/>
+                <table class="table" id="example3" >
+                    <tbody>
+                        <tr>
+                            <th>Id : </th>
+                            <td>{{ form.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Etat : </th>
+                            <td>
+                                {% if form.etat == 0 %}
+                                    <span class="label label-important">N'est pas vu.</span>
+                                {% elseif form.etat == 1 %}
+                                    <span class="label">Vu.</span>
+                                {% else %}
+                                    <span class="label label-success">Répandu.</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Objet : </th>
+                            <td>{{ form.objet }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom : </th>
+                            <td>{{ form.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email : </th>
+                            <td>{{ form.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Téléphone : </th>
+                            <td>{{ form.tele }}</td>
+                        </tr>
+                        <tr>
+                            <th>Message : </th>
+                            <td>{{ form.message }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br/><br/>
+                <div style=" float: right; margin-right: 1%; " >
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-danger" >Supprimer</button>
+                    <a href="{{ path('formcontact_index') }}"><span class="btn btn-default" >Retour à la liste</span>   </a>
+                    <a href="{{ path('form_index') }}"><span class="btn btn-default" >Liste de toutes les messages</span></a>
+                    {{ form_end(delete_form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="grid simple">
+            <form method="get" action="{{ path('formcontact_rependre', { 'id': form.id }) }}">
+                <div class="grid-title no-border">
+                    <h4>Rependre</h4>
+                    <div class="tools"> <a href="javascript:;" class="collapse"></a> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
+                </div>
+                <div class="grid-body no-border">
+                    <div class="alert alert-info">
+                        <button class="close" data-dismiss="alert"></button>
+                        Vous allez recevoir une copie sur votre email.</div>
+                    <textarea name="message" id="text-editor" placeholder="Enter text ..." class="form-control" rows="8"></textarea>
+                    <br/>
+                    <div style=" float: right; margin-right: 1%; " >
+                        <button type="submit" class="btn btn-info" >Rependre</button>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

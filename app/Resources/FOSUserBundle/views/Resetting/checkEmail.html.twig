@@ -1,0 +1,13 @@
+{% extends '::layout/index.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+<section id="form"><!--form-->
+    <div class="container">
+        <div class="row">
+            {{ 'resetting.check_email'|trans({'%email%': email}) }}
+        </div>
+    </div>
+</section><!--/form-->
+{% endblock %}

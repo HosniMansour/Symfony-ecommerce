@@ -1,0 +1,11 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+<section id="form">
+    <div class="container">
+        <div class="row">
+                {% include "FOSUserBundle:Resetting:request_content.html.twig" %}
+        </div>
+    </div>
+</section>
+{% endblock body %}

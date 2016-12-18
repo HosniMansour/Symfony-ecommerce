@@ -1,0 +1,68 @@
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/slide/catslide.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/slide/parallax-slider.css') }}">
+{% endblock %}
+
+<div class="container">
+    <div class="slider-wrapper">
+        <div id="da-slider" class="da-slider" style="background-position: 0% 0%;">
+            <div class="da-slide da-slide-fromleft da-slide-current">
+                <h2>Equipement Cabinet</h2>
+                <p>Augmenter la valeur dans nos vies <br/>
+                    Design ergonomique  <br/>
+                    Haute qualité.</p>
+                <a href="{{ path ('produit', {'page': 'c1-equipement-cabinet'}) }}" ><button class="da-link btn btn-lg">Savoir Plus</button></a>
+                <div class="da-img"><img src="{{ asset('img/slider/catslide1.png') }}" alt="Equipement Cabinet"></div>
+            </div>
+            <div class="da-slide da-slide-toright">
+                <h2>Cabinet Realise</h2>
+                <p>Augmenter la valeur dans nos vies <br/>
+                    Design ergonomique  <br/>
+                    Haute qualité.</p>
+                <a href="{{ path ('produit', {'page': 'c21-cabinet-realise'}) }}" ><button class="da-link btn btn-lg">Savoir Plus</button></a>
+                <div class="da-img"><img src="{{ asset('img/slider/catslide2.png') }}" alt="Cabinet Realise"></div>
+            </div>
+
+            <div class="da-slide">
+                <h2>Accesoires orthopédiques</h2>
+                <p>Augmenter la valeur dans nos vies <br/>
+                    Design ergonomique  <br/>
+                    Haute qualité.</p>
+                <a href="{{ path ('produit', {'page': 'c22-accessoires-orthopediques'}) }}" ><button class="da-link btn btn-lg">Savoir Plus</button></a>
+                <div class="da-img"><img src="{{ asset('img/slider/catslide3.png') }}" alt="Accesoires orthopédiques"></div>
+            </div>
+
+            <div class="da-slide">
+                <h2>Aide A la marche</h2>
+                <p>Augmenter la valeur dans nos vies <br/>
+                    Design ergonomique  <br/>
+                    Haute qualité.</p>
+                <a href="{{ path ('produit', {'page': 'c43-aide-a-la-marche'}) }}" ><button class="da-link btn btn-lg">Savoir Plus</button></a>
+                <div class="da-img"><img src="{{ asset('img/slider/almprod.png') }}" alt="Aide A la marche"></div>
+            </div>
+
+            <div class="da-slide">
+                <h2>Sabot orthopédique</h2>
+                <p>Augmenter la valeur dans nos vies <br/>
+                    Design ergonomique  <br/>
+                    Haute qualité.</p>
+                <a href="{{ path ('produit', {'page': 'c40-sabot-orthopedique'}) }}" ><button class="da-link btn btn-lg">Savoir Plus</button></a>
+                <div class="da-img"><img src="{{ asset('img/slider/catslide4.png') }}" alt="Sabot orthopédique"></div>
+            </div>
+
+            <nav class="da-arrows">
+                <span class="da-arrows-prev"></span>
+                <span class="da-arrows-next"></span>
+            </nav>
+            <span class="da-dots-current"></span><span class=""></span><span class=""></span><span class=""></span>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+
+    <script src="{{ asset('js/slide/flexslider.js') }}"></script>
+    <script src="{{ asset('js/slide/jquery.cslider.js') }}"></script>
+    <script src="{{ asset('js/slide/slider.js') }}"></script>
+    <script src="{{ asset('js/slide/custom.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,229 @@
+{% extends '::layout/index.html.twig' %}
+
+{% block body %}
+{% set total = 0 %}
+    <br/><br/><br/><br/>
+<div class="container">
+    <form action="{{ path('commander') }}" method="POST">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Produits :</h3><br/>
+            <table class="table no-border">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td>
+                            <h4><a href="">{{ produit.nom }}</a></h4>
+                            <p> Code: {{ produit.code }}</p>
+                        </td>
+                        <td>
+                            <p>{{ produit.prix|number_format(3, '.', ',') }} DT</p>
+                        </td>
+                        <td>
+                            {{ panier[produit.id] }}
+                        </td>
+                        <td >
+                            {% set total = total + (produit.prix * panier[produit.id]) %}
+                            <p class="cart_total_price">{{ (produit.prix * panier[produit.id])|number_format(3, '.', ',') }} DT</p>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="col-md-12">
+            <table class="table no-border">
+                <tbody>
+                <tr>
+                    <td class="pull-right" width="100px" style="border-top: beige;"><b>PRIX HT</b></td>
+                    <td class="text-center" width="120px" style="border-top: beige;">{{ total |number_format(3, '.', ',') }} DT</td>
+                </tr>
+                <tr>
+                    <td class="pull-right" width="100px"><b>TVA</b></td>
+                    <td class="text-center" width="120px">{{ ((total * 12) / 100) |number_format(3, '.', ',') }}
+                </tr>
+                <tr>
+                    <td class="pull-right" width="100px"><b>TOTAL TTC</b></td>
+                    <td class="text-center" width="120px">{{ (((total * 12) / 100)+total) |number_format(3, '.', ',') }} DT</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <h3>Information Personel</h3>
+                <hr/>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="nom" class="col-md-3 control-label">Nom : </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="nom" name="nom" value="{{ user.nom }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom" class="col-md-3 control-label">Prenom : </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="prenom" name="prenom" value="{{ user.prenom }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-md-3 control-label">Email : </label>
+                        <div class="col-md-8">
+                            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tel" class="col-md-3 control-label">Télephone : </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="tel"  name="tel" value="{{ user.tel }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nom" class="col-md-3 control-label">Adresse : </label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" name="adresse" cols="3">{{ user.adresse }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <h3>Information Commande</h3>
+                <hr/>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-6">Date : </label>
+                        <div class="col-md-6">
+                            {% if date %}{{ date|date('Y-m-d') }}{% endif %}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-6">Nombre des produit : </label>
+                        <div class="col-md-6">
+                            {{ produits|length }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-6">TOTAL TTC : </label>
+
+                        <div class="col-md-6">
+                            {{ (((total * 12) / 100)+total) |number_format(3, '.', ',') }} DT
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Modes de paiement disponibles : </h3>
+            <hr/>
+            <div class="col-md-1"></div>
+            <div class="col-md-6 ">
+                <input type="radio" id="virment" onclick="Check();" name="group2" value="virment" required> Paiement par virement<br>
+                <input type="radio" id="mondat" onclick="Check();" name="group2" value="mondat"> Paiement par Mandat<br>
+                <input type="radio" id="main" onclick="Check();"  name="group2" value="main"> Paiement main à la main<br>
+            </div>
+            <div class="col-md-5">
+                <br/>
+                <button type="submit" class="btn btn-info">Confirmer commande</button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div id="virmenttext" class="alert alert-info" style="display:none">
+        <strong>Paiement par virement</strong>
+        <br/>
+        <ul>
+            <li>Le paiement par virement bancaire entraîne systématiquement un traitement minimum de trois jours.</li>
+            <li>Virement provenant d'un établissement bancaire domicilié en Tunisie uniquement. </li>
+        </ul>
+        <h4>Mode opératoire: </h4>
+        <ul>
+            <li>1 - Le montant du transfert est : <span style="font-weight:bold">{{ (((total * 12) / 100)+total) |number_format(3, '.', ',') }} &nbsp;DT</span><br></li>
+            <li>2 - Nos coordonnées bancaires :<br>
+                <div >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Banque              : xx BANK <br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Adresse             : Xx &amp; 28, RUE Xx.<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Titulaire du compte : Medor Medical<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Numéro de compte    : 07 xxx x xxx xxx xxxxxx xx<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Numero iban         : TN59 xxxx xxxx xxxx xxxx xxxx<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Identifiant BIC     : xxxxxx<br>
+                </div>
+            </li>
+            <li>3 - Afin de valider votre paiement, veuillez nous envoyer par email à l’adresse <a href="paiement@medor.rn">paiement@medor.rn</a> votre preuve de paiement<br>et indiquer votre N° de BC dans le sujet du mail. Les formats des pièces jointes acceptés sont : .pdf .png .gif .jpg et .bmp (6Mo maximum)</li>
+        </ul>
+    </div>
+
+    <div id="mondattext" class="alert alert-info" style="display:none">
+        <strong>Paiement par Mandat</strong>
+        <br/>
+        <div>
+            <ul>
+                <li>Le Mandat entraîne systématiquement un traitement minimum de 2 jours.</li>
+            </ul>
+            <h4>Mode opératoire : </h4>
+            <ul>
+                <li>1 - Effectuer un Mandat auprès de la Poste Tunisienne<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Destinataire : <b>Medor Medical</b><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N° de compte CCP : <b>01xxxxxxxx</b><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Montant du mandat : <span style="font-weight:bold">{{ (((total * 12) / 100)+total) |number_format(3, '.', ',') }}&nbsp;DT</span><br>
+                </li>
+                <li>2 - Afin de valider votre paiement, veuillez nous envoyer par email à l’adresse <a href="paiement@medor.tn">paiement@medor.tn</a> votre preuve de paiement<br>et indiquer votre N° de BC dans le sujet du mail. Les formats des pièces jointes acceptés sont : .pdf .png .gif .jpg et .bmp (6Mo maximum)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="maintext" class="alert alert-info" style="display:none">
+        <strong>Paiement main à la main</strong> <br>
+        <ul>
+            <li>
+                Merci d'imprimer le reçu d'achat dans la page suivante et nous visiter dans notre local (<a target="_blank" href="{{ path ('contact') }}">Adresse</a>) avec le montant suivante : {{ (((total * 12) / 100)+total) |number_format(3, '.', ',') }} &nbsp;DT.
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        function Check() {
+            if (document.getElementById('virment').checked) {
+                document.getElementById('maintext').style.display = 'none';
+                document.getElementById('mondattext').style.display = 'none';
+                document.getElementById('virmenttext').style.display = 'none';
+
+                document.getElementById('virmenttext').style.display = 'block';
+            }else if (document.getElementById('mondat').checked) {
+                document.getElementById('maintext').style.display = 'none';
+                document.getElementById('mondattext').style.display = 'none';
+                document.getElementById('virmenttext').style.display = 'none';
+
+                document.getElementById('mondattext').style.display = 'block';
+            }else if (document.getElementById('main').checked) {
+                document.getElementById('maintext').style.display = 'none';
+                document.getElementById('mondattext').style.display = 'none';
+                document.getElementById('virmenttext').style.display = 'none';
+
+                document.getElementById('maintext').style.display = 'block';
+            }
+        }
+
+    </script>
+
+    </form>
+</div>
+
+<br/><br/>
+
+{% endblock %}
+

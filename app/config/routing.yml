@@ -1,0 +1,86 @@
+web_admin_formu:
+    resource: "@WebAdminBundle/Controller/FormuController.php"
+    type:     annotation
+
+web_admin_parameter:
+    resource: "@WebAdminBundle/Controller/ParameterController.php"
+    type:     annotation
+
+web_admin_page:
+    resource: "@WebAdminBundle/Controller/PageController.php"
+    type:     annotation
+
+user_user_user:
+    resource: "@UserUserBundle/Controller/UserController.php"
+    type:     annotation
+
+web_admin_partenaires:
+    resource: "@WebAdminBundle/Controller/PartenairesController.php"
+    type:     annotation
+
+web_admin_media:
+    resource: "@WebAdminBundle/Controller/MediaController.php"
+    type:     annotation
+
+web_admin_produit:
+    resource: "@WebAdminBundle/Controller/ProduitController.php"
+    type:     annotation
+
+web_admin_categorie:
+    resource: "@WebAdminBundle/Controller/CategorieController.php"
+    type:     annotation
+
+web_admin:
+    resource: "@WebAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /registrer
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+
+fos_user_security_login:
+    path:      /connexion
+    defaults:  { _controller: FOSUserBundle:Security:login, _method: POST }
+
+fos_user_security_logout:
+    path:      /deconnexion
+    defaults:  { _controller: FOSUserBundle:Security:logout, _method: POST }
+
+homepage:
+    resource: "@WebWebBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+panier:
+    path:     /panier
+    defaults: { _controller: WebWebBundle:Default:panier }
+
+addpanier:
+    path:     /ajouter/{id}
+    defaults: { _controller: WebWebBundle:Default:addPanier }
+
+removepanier:
+    path:     /supprimer/{id}
+    defaults: { _controller: WebWebBundle:Default:removePanier }
+
+commander:
+    path:     /commander
+    defaults: { _controller: WebWebBundle:Default:commander }
+
+
+#REST
+rest :
+  type : rest
+  resource : "routing_rest.yml"
+  prefix : /api

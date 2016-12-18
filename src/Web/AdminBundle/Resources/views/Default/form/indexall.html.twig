@@ -1,0 +1,87 @@
+{% extends '::layout/backend.html.twig'%}
+
+{% block stylesheets %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="grid simple ">
+                <div class="grid-title">
+                    <h4><span class="semi-bold">Contact</span></h4>
+                </div>
+                <div class="grid-body">
+                    <div class="row">
+                        <a href="{{ path('all_lu') }}">
+                            <button class="btn btn-white btn-cons pull-right" style="margin-right: 20px;">
+                                Marquer touts comme lu
+                            </button>
+                        </a>
+                    </div>
+                    <br/>
+                    <table class="table" id="example3" >
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Etat</th>
+                            <th>Type</th>
+                            <th>Objet</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for form in forms %}
+                            <tr>
+                                <td>{{ form.id }}</td>
+                                <td>
+                                    {% if form.etat == 0 %}
+                                        <span class="label label-important">N'est pas vu.</span>
+                                    {% elseif form.etat == 1 %}
+                                        <span class="label">Vu.</span>
+                                    {% else %}
+                                        <span class="label label-success">Répandu.</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if form.type == "contact" %}
+                                        <span class="label label-inverse">Contact</span>
+                                    {% elseif form.type == "demendedevis" %}
+                                        <span class="label label-info">Demande Devis</span>
+                                    {% else %}
+                                        <span class="label">Demande Devis d'un produit</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ form.objet }}</td>
+                                <td>
+                                    <ul style="list-style-type:none;padding:0px;margin:0px;">
+                                        <li>
+                                            {% if form.type == "contact" %}
+                                                <a href="{{ path('formcontact_show', { 'id': form.id }) }}"><button class="btn btn-sm btn-default">Afficher</button></a>
+                                            {% elseif form.type == "demendedevis" %}
+                                                <a href="{{ path('formdemandedevis_show', { 'id': form.id }) }}"><button class="btn btn-sm btn-default">Afficher</button></a>
+                                            {% else %}
+                                                <a href="{{ path('formdemandedevisp_show', { 'id': form.id }) }}"><button class="btn btn-sm btn-default">Afficher</button></a>
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('assets/plugins/bootstrap-select2/select2.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-datatable/js/jquery.dataTables.min.js')}}" type="text/javascript" ></script>
+    <script src="{{asset('assets/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js')}}" type="text/javascript" ></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatables-responsive/js/datatables.responsive.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatables-responsive/js/lodash.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.js')}}" type="text/javascript"></script>
+{% endblock %}

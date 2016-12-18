@@ -1,0 +1,14 @@
+products :
+  type: rest
+  resource: 'Web\AdminBundle\Controller\Rest\ProductRestController'
+  name_prefix:  api_
+
+categories :
+  type: rest
+  resource: 'Web\AdminBundle\Controller\Rest\CatRestController'
+  name_prefix:  api_
+
+partenaires :
+  type: rest
+  resource: 'Web\AdminBundle\Controller\Rest\PartenairesRestController'
+  name_prefix:  api_

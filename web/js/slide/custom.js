@@ -1,0 +1,1 @@
+function browser(){function e(e){return e in document.documentElement.style}var n=Object.prototype.toString.call(window.HTMLElement).indexOf("Constructor")>0,t=!n&&e("WebkitTransform");return n||t?!0:!1}jQuery(document).ready(function(e){e("#da-slider").cslider({autoplay:!0,bgincrement:0})});

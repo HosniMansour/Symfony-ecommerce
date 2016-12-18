@@ -1,0 +1,234 @@
+/*
+Theme : Medore
+Version: 1.0.0
+*/
+/**********  Green template *********/
+
+.link {
+    text-transform: uppercase;
+    color: #717774;
+}
+.no-padding {
+    padding: 0px;
+}
+::selection {
+    background: #3fce92;
+    color: #fff;
+}
+::-moz-selection {
+    background: #3fce92;
+    color: #fff;
+}
+.cd-top {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background: #3fce92 url(../img/cd-top-arrow.svg) no-repeat center 50%;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+    -moz-transition: opacity .3s 0s, visibility 0s .3s;
+    transition: opacity .3s 0s, visibility 0s .3s;
+}
+#slider .owl-buttons .owl-prev,
+#slider .owl-buttons .owl-next {
+    background-color: #3fce92;
+    opacity: 1;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 24px;
+    border-radius: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+body #slider .owl-buttons .owl-prev,
+#slider .owl-buttons .owl-next {
+    background-color: #3fce92;
+    color: #FFFFFF;
+}
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+    background-color: #3fce92;
+    color: #FFFFFF;
+}
+#slider .tp-btn-second {
+    background-color: #3fce92;
+    color: #FFFFFF;
+}
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span {
+    filter: Alpha(Opacity=100);
+    /*IE7 fix*/
+
+    opacity: 1;
+    background-color: #3fce92;
+}
+
+.tp-navigation {
+    background: #F0F0F0;
+    border-bottom: 1px solid #6ddb51;
+}
+
+.nav > li > a:hover, .nav > li > a:focus{
+    background-color: #fff;
+    box-shadow: inset 0px 5px #6ddb51;
+}
+
+
+
+.tp-navigation .navbar-form .tp-btn-default {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    background-color: #fff;
+    color: #3fce92;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.tp-navigation .navbar-default {
+    background-color: #F5F5F0;
+    border-color: transparent;
+}
+
+.tp-navigation .navbar-default .navbar-toggle .icon-bar {
+    background-color: #3fce92;
+}
+.tp-navigation .navbar-form .tp-btn-default {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    background-color: #fff;
+    color: #3fce92;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.tp-navigation .nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+    background-color: #3fce92;
+    border-color: #3fce92;
+}
+.more a:hover {
+    color: #3fce92;
+    background: #fff;
+    text-decoration: none;
+}
+.service-type-grd-right h4 {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin: 1em 0;
+    line-height: 1.3em;
+    color: #3fce92;
+}
+h2.titre2 {
+    display: inline;
+    /* Ne plus considérer le titre comme un bloc */
+    /* Après, c'est la même chose que pour titre1 : */
+
+    margin-left: 10px;
+    padding: 2px 10px 2px 5px;
+    border-left: 5px solid #3fce92;
+    border-bottom: 2px dotted #3fce92;
+    color: #804000;
+}
+h2.titre1 span {
+    padding: 2px 10px 2px 5px;
+    /* Dans l'ordre: padding-top padding-right padding-bottom padding-left */
+
+    margin-left: 10px;
+    /* Décaler le titre par rapport aux paragraphes normaux */
+
+    border-left: 5px solid #3fce92;
+    border-bottom: 2px dotted #3fce92;
+    color: #804000;
+}
+/************************ Cabiné ************************ */
+
+.title-block .icon-container {
+    float: left;
+    background: #3fce92;
+    width: 63px;
+    height: 55px;
+    text-align: center;
+    padding-right: 0px !Important
+}
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid #3fce92;
+    float: left;
+    margin: 18px 0 0 -4px
+}
+.divider span {
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #3fce92;
+    margin-top: -2px
+}
+.view-two .mask a.btn-icon:hover i {
+    color: #3fce92
+}
+.cabinet {
+    background: #3fce92;
+    padding: 14px 20px 10px 20px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase
+}
+.button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 300;
+    line-height: 1;
+    margin: 0 0 1.25em;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    padding-top: 0.75em;
+    padding-right: 1.5em;
+    padding-bottom: 0.8125em;
+    padding-left: 1.5em;
+    font-size: 1em;
+    background-color: #3fce92;
+    color: white;
+}
+.button:hover,
+.button:focus {
+    background-color: #3fce92
+}
+.view-two .mask {}
+/****************************************************/
+
+.or {
+    background: #6DDB51;
+    border-radius: 40px;
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 75px;
+    text-align: center;
+    width: 50px;
+}
+.login-form form button,
+.signup-form form button {
+    background: #6DDB51;
+    border: medium none;
+    border-radius: 0;
+    color: #FFFFFF;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    padding: 6px 25px;
+}

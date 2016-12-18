@@ -1,0 +1,73 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Paramètres</span></h4>
+            </div>
+            <div class="grid-body">
+                <form action="{{path('parameter_edit')}}" method="POST" {{form_enctype(edit_form)}}>
+                    <div class="col-md-12">
+                        {% if not edit_form.vars.valid %}
+                            {{ form_errors(edit_form) }}
+                        {% endif %}
+
+                        <div class="col-md-8">
+                            <div class="position-center">
+                                <div class="form-group">
+                                    {{ form_row(edit_form.nomSite, { 'label' : 'Nom Site :' }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(edit_form.descSite, { 'label' : 'Description Site :' }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(edit_form.keyWordSite, { 'label' : 'Tags :' }) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(edit_form.emailNoti, { 'label' : 'Email Notification :' }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Social Network : </h4>
+                            <hr/>
+                            <div class="form-group">
+                                {{ form_row(edit_form.SocialNetwork, { 'label' : ' ','attr': {'class': '', 'rows': '10'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h4>Footer :</h4><hr/>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form_row(edit_form.ftrImpl, { 'label' : 'Implantation :','attr': {'class': '', 'rows': '6'} }) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form_row(edit_form.ftrAdr, { 'label' : 'Adresse :','attr': {'class': '', 'rows': '6'} }) }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {{ form_row(edit_form.ftrIntro, { 'label' : 'Introduction :','attr': {'class': '', 'rows': '6'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                            {{ form_rest(edit_form) }}
+                    <div style=" float: right; margin-right: 5%; " >
+                        <button type="submit" class="btn btn-info" >Enregistrer</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}

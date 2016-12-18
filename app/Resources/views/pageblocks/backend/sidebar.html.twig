@@ -1,0 +1,58 @@
+<div class="page-sidebar" id="main-menu">
+    <div class="page-sidebar-wrapper scrollbar-dynamic" id="main-menu-wrapper">
+        <div class="user-info-wrapper">
+            {%
+            set img = 'img/default-avatar.png'
+            %}
+            {% if app.user.image is defined %}
+                {% if app.user.image is not null %}
+                    {% set img = app.user.image.image %}
+                {% endif %}
+            {% endif %}
+            <div class="profile-wrapper"> <img src="{{ asset(img) }}"  alt="" data-src="{{ asset(img) }}" data-src-retina="{{ asset(img) }}" width="69" height="69" /> </div>
+            <div class="user-info">
+                <div class="greeting">Bonjour</div>
+                <div class="username"> {% if app.user.nom is not null %} {{ app.user.nom }} <br/><span class="semi-bold"> {{ app.user.prenom }} </span> {% else %} {{ app.user.username }} {% endif %} </div>
+                <br/>
+            </div>
+        </div>
+        <p class="menu-title">BROWSE <span class="pull-right"><a href="javascript:;" onclick="window.location.reload(false); "><i class="fa fa-refresh"></i></a></span></p>
+        <ul style="margin-bottom: 100px;">
+            <li class="start"> <a href="{{ path ('web_admin_homepage') }}"> <i class="fa fa-home"></i> <span class="title">Accueil</span>  </a> </li>
+            <li class=""> <a href="{{ path ('page_index') }}"> <i class="fa fa-file"></i> <span class="title">Pages</span> </a></li>
+            <li class=""> <a href="javascript:;"> <i class="fa fa-shopping-cart"></i> <span class="title">Produits</span> <span class="arrow "></span> </a>
+                <ul class="sub-menu">
+                    <li > <a href="{{ path ('produit_new') }}">Ajouter Produit</a> </li>
+                    <li > <a href="{{ path ('produit_index') }}">Toutes Les Produits</a> </li>
+                </ul>
+            </li>
+            <li class=""> <a href="javascript:;"> <i class="fa fa-folder-open-o"></i> <span class="title">Categories</span> <span class="arrow "></span> </a>
+                <ul class="sub-menu">
+                    <li > <a href="{{ path ('categorie_new')}}">Ajouter Categorie</a> </li>
+                    <li > <a href="{{ path ('categorie_index') }}">Toutes Les Categories</a> </li>
+                </ul>
+            </li>
+            <li class=""> <a href="{{ path ('user_index')}}"> <i class="fa fa-user"></i> <span class="title">Utilisateur</span> </a>
+            <li class=""> <a href="{{ path ('commande_index')}}"> <i class="fa fa-laptop"></i> <span class="title">Commande</span> </a>
+            </li>
+            <li class=""> <a href="javascript:;"> <i class="fa fa-building"></i> <span class="title">Partenaires</span> <span class="arrow "></span> </a>
+                <ul class="sub-menu">
+                    <li > <a href="{{ path ('partenaires_new')}}">Ajouter Partenaire</a> </li>
+                    <li > <a href="{{ path ('partenaires_index') }}">Toutes Les Partenaires</a> </li>
+                </ul>
+            </li>
+            <li class=""> <a href="javascript:;"> <i class="fa fa-envelope"></i> <span class="title">Messages</span> <span class="arrow "></span> </a>
+                <ul class="sub-menu">
+                    <li > <a href="{{ path ('form_index') }}">Voir tous</a> </li>
+                    <li > <a href="{{ path ('formcontact_index')}}">Contact</a> </li>
+                    <li > <a href="{{ path ('formdemandedevis_index') }}">Demande Devis</a> </li>
+                    <li > <a href="{{ path ('formdemandedevisp_index') }}">Demande Devis d'un Produit</a> </li>
+                </ul>
+            </li>
+            <li class=""> <a href="{{ path ('media_index')}}"> <i class="fa fa-picture-o"></i> <span class="title">Media</span> </a> </li>
+            <li class=""> <a href="{{ path ('parameter_edit')}}"> <i class="fa fa-cog"></i> <span class="title">Paramètres</span> </a> </li>
+            <li class=""> <a href="{{ path('fos_user_security_logout') }}"> <i class="fa fa-sign-out"></i> <span class="title">Déconnexion</span> </a> </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+</div>

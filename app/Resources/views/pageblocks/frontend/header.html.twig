@@ -1,0 +1,65 @@
+{% set lastprod = getLast() %}
+	{% if lastprod[0].photos is not empty %}
+	<div id="topcorner" class="animated bounceInDown">
+		<a href="{{path ('infoproduit', {'prod': lastprod[0].lien})}}"><img src="{{asset(lastprod[0].photos[0].image)}}" /></a>
+	</div>
+	{% endif %}
+	<header class="tp-header">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-md-3 tp-logo">
+				<a class="navbar-brand" href="/" rel="home">
+					<img src="{{ asset('img/logo.gif') }}" alt="Medor" class="img-responsive" style="height: 50px;">
+				</a>
+			  <br/>
+			  <p class="desc"> Matériel Médico & orthopédique</p>
+		 </div>
+
+		<div class="col-md-9 tp-top-link">
+			<p class="navbar-text navbar-right cnx" >
+				{% if app.user %}
+					{% if is_granted('ROLE_SUPER_ADMIN') %}
+						<a href="{{ path ('web_admin_homepage')}}"><button class="btn btn-info"> <i class="fa fa-lock"> Admin Cpanel</i></button> </a>
+					{% elseif is_granted('ROLE_RESPONSABLE') %}
+						<a href="{{ path ('web_admin_homepage')}}"><button class="btn btn-info"> <i class="fa fa-lock"> Admin Cpanel</i></button> </a>
+					{% endif %}
+						<a href="{{ path ('fos_user_profile_show')}}"><button class="btn"> <i class="fa fa-user"> Profile</i></button> </a>
+						<a href="{{ path ('fos_user_security_logout')}}"><button class="btn"> <i class="fa fa-sign-out"> Déconnexion</i></button> </a>
+					{% else %}
+					<a href="{{ path ('fos_user_security_login')}}"><button class="btn"><i class="fa fa-user"> Connexion / S'inscrire</i></button> </a>
+				{% endif %}
+				<a href="{{ path ('panier')}}"><button id="texth" class="btn"> <i class="fa fa-shopping-basket"> Panier ({{getGlobals()['NbrPan']}})</i></button></a>
+			</p>
+		</div>
+		</div>
+	  </div>
+	</header>
+<div class="tp-navigation" id="nav" data-offset-top="197" data-spy="affix">
+ <nav class="navbar navbar-default navbar-static-top marginBottom-0" role="navigation">
+   <div class="container">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+     </div>
+     <div class="collapse navbar-collapse" id="navbar-collapse-1">
+       <ul id="menu-top-menu" class="dentistry-main-menu nav navbar-nav">
+		   <li> <a href="{{ path ('web_web_homepage') }}">Acceuil</a></li>
+		   <li > <a href="{{ path ('page', {'nom': 'presentation'}) }}">Présentation</a></li>
+		   <li > <a href="{{ path ('produit', {'page': 'equipement-cabinet'}) }}">Equipement Cabinet</a></li>
+		   <li > <a href="{{ path ('produit', {'page': 'cabinet-realise'}) }}">Cabinet Réalisé</a></li>
+		   <li > <a href="{{ path ('produit', {'page': 'accessoires-orthopediques'}) }}">Accessoires orthopédiques</a></li>
+		   <li > <a href="{{ path ('produit', {'page': 'aide-a-la-marche'}) }}">Aide A la marche</a></li>
+		   <li > <a href="{{ path ('produit', {'page': 'sabot-orthopedique'}) }}">Sabot orthopédique</a></li>
+		   <li > <a href="{{ path ('demande') }}">Demande Devis</a></li>
+		   <li > <a href="{{ path ('contact') }}">Contact</a></li>
+       </ul>
+      </div>
+   </div>
+ </nav>
+</div>
+<script>
+	var url = window.location;
+	$('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+	$('ul.nav a').filter(function() {
+		return this.href == url;
+	}).parent().addClass('active');
+</script>

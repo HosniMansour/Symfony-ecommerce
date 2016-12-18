@@ -1,0 +1,63 @@
+{% extends '::layout/backend.html.twig' %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Partenaires</span></h4>
+            </div>
+            <div class="grid-body">
+                <div class="row">
+                    <a href="{{ path('partenaires_new') }}">
+                        <button id="editable-sample_new" class="btn btn-primary">
+                            <i class="fa fa-plus"></i> Ajouter Un Partenaire
+                        </button>
+                    </a>
+                </div>
+                <br/>
+                <table class="table" id="example3" >
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Image</th>
+                    <th>Lien</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for partenaire in partenaires %}
+                <tr>
+                    <td>{{ partenaire.id }}</td>
+                    <td>{{ partenaire.nom }}</td>
+                    <td><img src="{{ asset(partenaire.image.image) }}" width="150" height="66" alt=""></td>
+                    <td>{{ partenaire.lien }}</td>
+                    <td>
+                        <ul style="list-style-type:none;padding:0px;margin:0px;">
+                            <li>
+                                <a href="{{ path('partenaires_edit', { 'id': partenaire.id }) }}"><button class="btn btn-sm btn-default">Modifier</button></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('assets/plugins/bootstrap-select2/select2.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-datatable/js/jquery.dataTables.min.js')}}" type="text/javascript" ></script>
+    <script src="{{asset('assets/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js')}}" type="text/javascript" ></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatables-responsive/js/datatables.responsive.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatables-responsive/js/lodash.min.js')}}"></script>
+    <script src="{{asset('assets/js/datatables.js')}}" type="text/javascript"></script>t>
+{% endblock %}

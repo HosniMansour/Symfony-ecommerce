@@ -1,0 +1,107 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Modifier produit</span></h4>
+            </div>
+            <div class="grid-body">
+                {{ form_start(edit_form) }}
+                <div class="col-md-12">
+                    {% if not edit_form.vars.valid %}
+                        {{ form_errors(edit_form) }}
+                    {% endif %}
+                    <div class="col-md-8">
+                        <div class="position-center">
+                            <div class="form-group">
+                                {{ form_row(edit_form.nom, { 'label' : 'Nom de Produit :' }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(edit_form.description, { 'label' : 'Description :','attr': {'class': 'form-control ckeditor', 'rows': '5'} }) }}
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Images : </label>
+                                    <div class="row">
+                                        {% for img in produit.photos %}
+                                            <div class="col-lg-3 col-sm-4 col-xs-6" style="    margin-bottom: 8px;"><a href="#">
+                                                    <img class="thumbnail img-responsive" src="{{ asset(img.image) }}" height="120" width="120" style="width: 100%;height: 100px"></a>
+                                                <center><a target="_blank" href="{{ path('media_edit', { 'id': img.id }) }}"><span class="btn btn-sm btn-default">Modifier/Supp..</span></a></center>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <span class="label label-danger">NOTE!</span>
+                                     <span>
+                                        Si vous allez supprimer une image, supprimer l'image d'abord puis rafraîchir la page avant de modifier les autres informations.
+                                     </span>
+                                    <br/><br/>
+                                    <div class="form-group">
+                                        <ul class="images" data-prototype="{{ form_widget(edit_form.photos.vars.prototype.file)|e }}" style="list-style-type: none;">
+                                            {% for img in produit.photos %}
+                                                <input type="hidden" value="{{ img.image }}" >
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {{ form_row(edit_form.code, { 'label' : 'Code Produit :' }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(edit_form.categorie, { 'label' : 'Categorie :' }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(edit_form.prix, { 'label' : 'Prix :' }) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(edit_form.nbrstock, { 'label' : 'Quantité disponible'}) }}
+                        </div>
+                    </div>
+                </div>
+                {{ form_row(edit_form.photos, { 'attr': {'style': 'display:none;'} }) }}
+                <div style=" float: right; margin-right: 1%; " >
+                    <a href="{{ path('produit_index') }}"><span class="btn btn-default" >Retour à la liste</span>   </a>
+                    <button type="submit" class="btn btn-info" >Modifier Produit</button>
+                </div>
+                {{ form_rest(edit_form) }}
+                {{ form_end(edit_form) }}
+                {{ form_start(delete_form) }}<button type="submit" class="btn btn-danger" >Supprimer</button> {{ form_end(delete_form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('admin/lib/ckeditor/ckeditor.js') }}"></script>
+    <script>
+        var $collectionHolder;
+        var $addTagLink = $('<a href="#" ><button class="btn btn-success" >Ajouter une image</button></a>');
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+        jQuery(document).ready(function() {
+            $collectionHolder = $('ul.images');
+            $collectionHolder.append($newLinkLi);
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+            $addTagLink.on('click', function(e) {
+                e.preventDefault();
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+        function addTagForm($collectionHolder, $newLinkLi) {
+            var prototype = $collectionHolder.data('prototype');
+            var index = $collectionHolder.data('index');
+            var newForm = prototype.replace(/__name__/g, index);
+            $collectionHolder.data('index', index + 1);
+            var $newFormLi = $('<li style="margin-top: 1%;margin-bottom: 1%;"></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends '::layout/index.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+    <br/><br/>
+
+    <div class="container"><!--form-->
+        <div class="row">
+            <div class="col-xs-12 col-md-3 pull-left">
+                <aside class="sidebar sidebar-left">
+                    <aside  class="widget widget-style clearfix widget_product_categories">
+                        <h3 class="widget-title"><span><span>Profile</span></span></h3>
+                        <br/>
+                        <div class="col-md-12">
+                            <ul class="product-categories">
+                                <li class="cat-item cat-parent">
+                                    <ul class='children'>
+                                        <a href="{{ path('fos_user_profile_show') }}">
+                                            Profile
+                                        </a>
+                                    </ul>
+                                    <ul class='children'>
+                                        <a href="{{ path('fos_user_change_password') }}">
+                                            Modifier Mot De passe
+                                        </a>
+                                    </ul>
+                                    <ul class='children'>
+                                        <a href="{{ path('fos_user_profile_edit') }}">
+                                            Modifier Email
+                                        </a>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </aside>
+            </div>
+
+            <div id="main-content" class="main-content col-xs-12 col-xs-12 col-md-9">
+                <div id="primary" class="content-area">
+                    <div id="content" class="site-content" role="main">
+                        <h1 class="page-title">Bonjour !</h1>
+                    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+                    {% if targetUrl %}
+                    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+                    {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <br/><br/>
+{% endblock body %}

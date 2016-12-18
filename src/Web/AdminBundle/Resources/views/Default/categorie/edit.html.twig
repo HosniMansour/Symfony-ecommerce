@@ -1,0 +1,25 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Modifier categories</span></h4>
+            </div>
+            <div class="grid-body">
+                {{ form_start(edit_form) }}
+                {{ form_widget(edit_form) }}
+                <div style=" float: right; margin-right: 1%; " >
+                    <a href="{{ path('categorie_index') }}"><span class="btn btn-default" >Retour à la liste</span>   </a>
+                    <button id="sub" type="submit" class="btn btn-info" >Modifier Categorie</button>
+                </div>
+                {{ form_end(edit_form) }}
+                {{ form_start(delete_form) }}<button type="submit" class="btn btn-danger" >Supprimer</button>{{ form_end(delete_form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

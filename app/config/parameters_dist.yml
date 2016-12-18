@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: armadillo.arvixe.com
+    database_port: 3306
+    database_name: xochn_DBmedor
+    database_user: xochn_medor
+    database_password: xochn123456
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 9daf98d23588e948b53accf4ce1b4b921b7ae277

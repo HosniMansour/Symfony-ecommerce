@@ -1,0 +1,95 @@
+{% extends '::layout/backend.html.twig' %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="grid simple ">
+            <div class="grid-title">
+                <h4><span class="semi-bold">Ajouter produit</span></h4>
+            </div>
+            <div class="grid-body">
+                <div class="row">
+                    <form enctype="multipart/form-data" action="{{path('produit_new')}}" method="POST" {{form_enctype(form)}}>
+                    <div class="col-md-12">
+                            {% if not form.vars.valid %}
+                                {{ form_errors(form) }}
+                            {% endif %}
+                        <div class="col-md-8">
+                            <div class="position-center">
+                                    <div class="form-group">
+                                        {{ form_row(form.nom, { 'label' : 'Nom de Produit :' }) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_row(form.description, { 'label' : 'Description :','attr': {'class': 'form-control ckeditor', 'rows': '5'} }) }}
+                                    </div>
+                                    <div class="form-group">
+                                      <label >Images :</label>
+                                        <ul class="add-images" data-prototype="{{ form_widget(form.photos.vars.prototype.file)|e }}" style="list-style-type: none;" ></ul>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {{ form_row(form.code, { 'label' : 'Code Produit :' }) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.categorie, { 'label' : 'Categorie :' }) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_row(form.nbrstock, { 'label' : 'Quantité disponible','value': '1'}) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_row(form.prix, { 'label' : 'Prix :' ,'value': '0'}) }}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div style=" float: right; margin-right: 1%; " >
+                        <a href="{{ path('produit_index') }}"><span class="btn btn-default" >Retour à la liste</span></a>
+                        <button type="submit" class="btn btn-info" >Ajouter Produit</button>
+                    </div>
+                        {{ form_rest(form) }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script type="text/javascript" src="{{ asset('admin/lib/ckeditor/ckeditor.js') }}"></script>
+<script>
+
+    var $collectionHolder;
+    var $addTagLink = $('<a href="#" ><button class="btn btn-success" >Ajouter une image</button></a>');
+    var $newLinkLi = $('<li></li>').append($addTagLink);
+
+    jQuery(document).ready(function() {
+        $collectionHolder = $('ul.add-images');
+        $collectionHolder.append($newLinkLi);
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+        $addTagLink.on('click', function(e) {
+            e.preventDefault();
+            addTagForm($collectionHolder, $newLinkLi);
+        });
+    });
+
+    function addTagForm($collectionHolder, $newLinkLi) {
+        var prototype = $collectionHolder.data('prototype');
+        var index = $collectionHolder.data('index');
+        var newForm = prototype.replace(/__name__/g, index);
+        $collectionHolder.data('index', index + 1);
+        var $newFormLi = $('<li style="margin-top: 1%;margin-bottom: 1%;"></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+    }
+
+</script>
+
+{% endblock %}
